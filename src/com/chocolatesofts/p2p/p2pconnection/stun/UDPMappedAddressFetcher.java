@@ -28,7 +28,8 @@ public class UDPMappedAddressFetcher {
         if(isAddressPresent())
             throw new IllegalArgumentException("Already fetched");
         DatagramSocket datagramSocket = new DatagramSocket(sourcePort);
-        datagramSocket.setSoTimeout(timeout);
+        if(timeout>0)
+            datagramSocket.setSoTimeout(timeout);
 
         ByteArrayOutputStream payload = new ByteArrayOutputStream();
         StunMessage requestMessage = BindingMethod.newRequestPayload(payload);

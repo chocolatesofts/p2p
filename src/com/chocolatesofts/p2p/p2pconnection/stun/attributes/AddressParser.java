@@ -1,6 +1,6 @@
 package com.chocolatesofts.p2p.p2pconnection.stun.attributes;
 
-import com.chocolatesofts.p2p.p2pconnection.stun.util.PrimitiveTypesUtil;
+import com.chocolatesofts.p2p.p2pconnection.util.PrimitiveTypesUtil;
 import com.chocolatesofts.p2p.p2pconnection.stun.protocol.StunHeader;
 import com.chocolatesofts.p2p.p2pconnection.stun.models.AddressHolder;
 import java.io.IOException;

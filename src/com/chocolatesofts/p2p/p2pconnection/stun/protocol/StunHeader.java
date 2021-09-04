@@ -1,6 +1,6 @@
 package com.chocolatesofts.p2p.p2pconnection.stun.protocol;
 
-import com.chocolatesofts.p2p.p2pconnection.stun.util.PrimitiveTypesUtil;
+import com.chocolatesofts.p2p.p2pconnection.util.PrimitiveTypesUtil;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

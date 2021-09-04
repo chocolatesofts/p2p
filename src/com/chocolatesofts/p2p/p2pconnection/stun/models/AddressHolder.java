@@ -1,6 +1,6 @@
 package com.chocolatesofts.p2p.p2pconnection.stun.models;
 
-import com.chocolatesofts.p2p.p2pconnection.stun.util.PrimitiveTypesUtil;
+import com.chocolatesofts.p2p.p2pconnection.util.PrimitiveTypesUtil;
 
 public class AddressHolder {
     private final char port;

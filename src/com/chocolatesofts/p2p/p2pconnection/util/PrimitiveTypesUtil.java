@@ -1,4 +1,4 @@
-package com.chocolatesofts.p2p.p2pconnection.stun.util;
+package com.chocolatesofts.p2p.p2pconnection.util;
 
 public class PrimitiveTypesUtil {
 
@@ -11,14 +11,15 @@ public class PrimitiveTypesUtil {
             throw new IllegalArgumentException("Byte cannot be converted to hex char");
         if(b<10)
             return (char)(48 + b);
-        return (char)('A' + b -10);
+        return (char)('a' + b -10);
     }
 
-    public static byte asByte(final char c) {
+    public static byte asByte(char c) {
+        c = Character.toLowerCase(c);
         if ((c >= '0' && c <= '9'))
             return (byte)(c-'0');
-        if (c >= 'A' && c <= 'F')
-            return (byte)(c-'A'+10);
+        if (c >= 'a' && c <= 'f')
+            return (byte)(c-'a'+10);
         throw new IllegalArgumentException("Invalid hex character");
     }
 
@@ -37,13 +38,33 @@ public class PrimitiveTypesUtil {
     public static byte asByte(final String hexStr) {
         return (byte)(fromHexStr(hexStr, 2));
     }
+    public static char asChar(final String hexStr) {
+        return (char)(fromHexStr(hexStr, 4));
+    }
 
-    public static String asHexByteString(final byte b) {
-        final char uByte = unsignedByte(b);
+    public static String asHexString(final byte[] bytes) {
         final StringBuilder hexStr = new StringBuilder();
-        hexStr.append(asHexChar((byte)(uByte>>4)));
-        hexStr.append(asHexChar((byte)(uByte & 0x0F)));
+        for (byte b : bytes) {
+            final char uByte = unsignedByte(b);
+            hexStr.append(asHexChar((byte) (uByte >> 4)));
+            hexStr.append(asHexChar((byte) (uByte & 0x0F)));
+        }
         return hexStr.toString();
+    }
+
+    public static byte[] asBytes(final String hexStr) {
+        if (hexStr.length() % 2 != 0) {
+            throw new IllegalArgumentException("Invalid hex string");
+        }
+        byte[] bytes = new byte[hexStr.length()/2];
+        for (int i=0; i < bytes.length; i++) {
+            bytes[i] = asByte(hexStr.substring(2*i, 2*(i+1)));
+        }
+        return bytes;
+    }
+
+    public static String asHexString(final char c) {
+        return asHexString(new byte[]{(byte)(c >> 8), (byte)(c & 0xFF)});
     }
 
     public static long unsignedInteger(final int n) {
